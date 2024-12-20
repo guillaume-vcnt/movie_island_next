@@ -12,7 +12,7 @@ Nombre de participants : 1
 
 Technologies : Next, TypeScript, Tailwind CSS, Node, Express, MongoDB, PostgreSQL
 
-Refactorisé :
+Refactorisation :
 
 Responsive :
 
