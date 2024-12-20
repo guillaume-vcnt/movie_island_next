@@ -1,6 +1,7 @@
-movie_island_next
+Movie Island
 
-## À propos 
+## À propos
+
 Ce projet a pour objectif de développer un site web dotée de sa propre base de données, permettant à l'utilisateur de se connecter, de répondre à des quiz et de recevoir des recommandations de films générées selon des filtres précis et personnalisés.
 
 ## Caractéristiques
