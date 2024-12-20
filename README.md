@@ -14,7 +14,7 @@ Technologies : Next, TypeScript, Tailwind CSS, Node, Express, MongoDB, PostgreSQ
 
 Refactorisé :
 
-Responsivité :
+Responsive :
 
 UI/UX :
 
