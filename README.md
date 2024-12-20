@@ -1,4 +1,4 @@
-Movie Island
+Movie Island (Next)
 
 ## À propos
 
@@ -12,7 +12,7 @@ Nombre de participants : 1
 
 Technologies : Next, TypeScript, Tailwind CSS, Node, Express, MongoDB, PostgreSQL
 
-Refactorisé : 
+Refactorisé :
 
 Responsivité :
 
@@ -20,8 +20,8 @@ UI/UX :
 
 IDE : VSCode
 
-OS : Windows 
+OS : Windows
 
-## Utilisation 
+## Utilisation
 
 S'exécute via...
