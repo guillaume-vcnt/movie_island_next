@@ -24,4 +24,4 @@ OS : Windows
 
 ## Utilisation
 
-S'exécute via...
+S'exécute via : 
