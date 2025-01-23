@@ -35,7 +35,7 @@ export default async function Home() {
     return (
       <>
         <ul>
-          <Link href="/">Home</Link>
+          <Link href="/">Home Page</Link>
         </ul>
 
         <br></br>

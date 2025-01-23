@@ -37,6 +37,9 @@ export default async function moviePage({
 
   return (
     <>
+    <Link href="/">Return Home page</Link>
+    <br></br>
+    <br></br>
       <ul>
         {movieArray.map((movie) => (
           <li key={movie.id}>
