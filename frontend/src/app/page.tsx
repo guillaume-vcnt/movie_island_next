@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface Movie {
   id: number;
@@ -8,6 +9,7 @@ interface Movie {
   year: number;
   duration: number;
   audience: string;
+  poster: string;
 }
 
 export default async function Home() {
@@ -35,7 +37,7 @@ export default async function Home() {
     return (
       <>
         <ul>
-          <Link href="/">Home Page</Link>
+          <Link className="font-bold" href="/">Home Page</Link>
         </ul>
 
         <br></br>
@@ -43,7 +45,14 @@ export default async function Home() {
         <ul>
           {movieArray.map((movie) => (
             <li key={movie.id}>
-              <Link href={`/movie/${movie.id}`}>{movie.title}</Link>
+              <Link href={`/movie/${movie.id}`}>{movie.title}
+                <Image
+                  src={movie.poster}
+                  alt="Poster du film"
+                  width={100}
+                  height={60}
+                />
+              </Link>
             </li>
           ))}
         </ul>

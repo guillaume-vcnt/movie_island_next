@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface Movie {
   id: number;
@@ -8,6 +9,7 @@ interface Movie {
   year: number;
   duration: number;
   audience: string;
+  poster: string;
 }
 
 export default async function moviePage({
@@ -32,28 +34,37 @@ export default async function moviePage({
   // Typifier idMovie.data comme étant un tableau de films
   const movieArray: Movie[] = idMovie.data;
   //Affiche l'objet dans la console
-  console.log(movieArray);
+  console.log("🎥", movieArray);
   //Le problème est que movieArray est déjà typé comme un tableau de films (Movie[]). En TypeScript, un tableau n'a pas de propriété data par défaut. Ce qui signifie que l'accès à movieArray.data est invalide car movieArray est un tableau, pas un objet avec une propriété data.
 
   return (
     <>
-    <Link href="/">Return Home page</Link>
-    <br></br>
-    <br></br>
       <ul>
         {movieArray.map((movie) => (
           <li key={movie.id}>
-            <h2>{movie.title}</h2>
+            <h2 className="font-bold">{movie.title}</h2>
             <p>Director: {movie.director}</p>
             <p>Genre: {movie.genre}</p>
             <p>Year: {movie.year}</p>
             <p>Duration: {movie.duration} minutes</p>
             <p>Audience: {movie.audience}</p>
+            <br></br>
+            <Image
+              src={movie.poster}
+              alt="Poster du film"
+              width={100}
+              height={60}
+            />
           </li>
         ))}
       </ul>
       <br></br>
-      <Link className="text-red-500 hover:text-red-700" href="/quiz">Start Quiz</Link>
+      <Link className="text-red-500 hover:text-red-800" href="/quiz">
+        Start Quiz
+      </Link>
+      <br></br>
+      <br></br>
+      <Link href="/">Return Home page</Link>
     </>
   );
 }
