@@ -1,7 +1,14 @@
-const express = require("express");
-const { neon } = require("@neondatabase/serverless");
-const router = express.Router();
+import express from "express";
+import { neon } from "@neondatabase/serverless";
+import dotenv from "dotenv";
+dotenv.config();
+
 const sql = neon(process.env.DATABASE_URL);
+const router = express.Router();
+
+// req.params  ->  api/movie/:id  ->  api/movie/25
+// req.query  ->  api/movie?id=  ->  api/movie?id=25
+// req.body  ->  POSTMAN + JSON (Middleware : express.json() et express.urlencoded())
 
 // Route principale
 router.get("/", async (req, res) => {
@@ -10,7 +17,6 @@ router.get("/", async (req, res) => {
     const result = await sql`SELECT version()`;
     const { version } = result[0];
     res.send(`Database version: ${version}`);
-    // res.send("<h1>Hello World</h1>");
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
@@ -18,89 +24,86 @@ router.get("/", async (req, res) => {
 });
 
 // Route pour récupérer tous les films
-router.get("/all", async (req, res) => {
+router.get("/movie", async (req, res) => {
   try {
     console.log("Route tous les films");
     const result = await sql`SELECT * FROM "Movies"`;
     const data = result;
-    res.json({ message: "Methode GET", data }); //retourne la data en Json
+    res.json({ message: "Methode GET : tous les films", data });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
   }
 });
 
-// Route pour récupérer les films par id
-router.get("/:id", async (req, res) => {
+// Route pour récupérer les films par id (req.params)
+router.get("/movie/:id", async (req, res) => {
   try {
-    const valueId = req.params.id;
     console.log("Route films par id");
-    const result =
-      await sql`SELECT * FROM "Movies" WHERE "movie_id" = ${valueId};`;
+    const id = req.params.id;
+    console.log(id);
+    const result = await sql`SELECT * FROM "Movies" WHERE "id" = ${id};`;
     const data = result;
-    res.json({ data });
+    res.json({ message: "Methode GET : films par id", data });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
   }
 });
 
-// Route pour filtrer les films par genre
-router.get("/genre", async (req, res) => {
+// Route pour filtrer les films par genre (req.query)
+router.get("/movie/?", async (req, res) => {
   try {
-    const valueGenre = req.params.genre;
     console.log("Route films par genre");
-    const result =
-      await sql`SELECT * FROM "Movies" WHERE "genre" = ${valueGenre};`;
+    const genre = req.query;
+    const result = await sql`SELECT * FROM "Movies" WHERE "genre" = ${genre};`;
     const data = result;
-    res.json({ data });
+    res.json({ message: "Methode GET : films par genre", data });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
   }
 });
 
-// Route pour ajouter un film
-router.post("/addmovie", async (req, res) => {
+// Route pour ajouter un film (req.body)
+router.post("/movie", async (req, res) => {
   try {
     console.log("Route ajouter un film");
-    console.log(req.body)
-    const data = req.body
-      await sql`INSERT INTO "Movies" ("title", "director", "years", "genre", "duration", "audience") 
-                VALUES (${data.title}, ${data.director}, ${data.releaseYear}, ${data.genre}, ${data.duration}, ${data.audience});`;
-    res.json({ message: "Methode POST"});
+    const data = req.body;
+    await sql`INSERT INTO "Movies" ("title", "director", "year", "genre", "duration", "audience")
+                VALUES (${data.title}, ${data.director}, ${data.year}, ${data.genre}, ${data.duration}, ${data.audience});`;
+    res.json({ message: "Methode POST : ajouter un film" });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
   }
 });
 
-// Route pour mettre à jour un film
-router.put("/updatemovie", async (req, res) => {
+// Route pour mettre à jour un film (req.params / req.body) ?
+router.put("/movie/:id", async (req, res) => {
   try {
     console.log("Route mettre à jour un film");
-    console.log(req.body)
-    const data = req.body
-    await sql`UPDATE "Movies" SET "title" = ${data.newvalue} WHERE "title" = ${data.title}`;
-    res.json({ message: "Methode PUT"});
+    const data = req.params.id;
+    const newdata = req.body.newtitle;
+    await sql`UPDATE "Movies" SET "title" = ${newdata.newtitle} WHERE "id" = ${data}`;
+    res.json({ message: "Methode PUT : mettre à jour un film" });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
   }
 });
 
-// Route pour supprimer un film
-router.delete("/delmovie", async (req, res) => {
+// Route pour supprimer un film (req.params)
+router.delete("/movie/:id", async (req, res) => {
   try {
-    console.log(req.body)
     console.log("Route supprimer un film");
-    const data = req.body
-    await sql`DELETE FROM "Movies" WHERE "title" = ${data.title};`;
-    res.json({ message: "Methode DELETE"});
+    const data = req.params.id;
+    await sql`DELETE FROM "Movies" WHERE "id" = ${data};`;
+    res.json({ message: "Methode DELETE, supprimer un film" });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
   }
 });
 
-module.exports = router;
+export default router;
