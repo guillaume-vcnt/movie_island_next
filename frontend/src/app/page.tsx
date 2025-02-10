@@ -36,12 +36,25 @@ export default async function Home() {
     return (
       <>
         <ul>
-          <Link className="font-bold" href="/">
+          <Link className="font-bold" href="/movie/">
             Home Page
           </Link>
+          <br></br>
+          <br></br>
+          <Link className="font-bold text-red-500" href={`/genre`}>
+            Horreur
+          </Link>
+          <br></br>
+          <Link className="font-bold text-red-500" href="/movie/genre">
+            SCI-FI
+          </Link>
+          <br></br>
+          <Link className="font-bold text-red-500" href="/movie/genre">
+            Adventure
+          </Link>
+          <br></br>
+          <br></br>
         </ul>
-
-        <br></br>
 
         <ul>
           {movieArray.map((movie) => (

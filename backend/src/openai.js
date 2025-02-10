@@ -25,7 +25,7 @@ const quizEvent = z.object({
   correct_answer: z.string(),
 });
 
-export async function generateQuiz() {
+export async function generateQuiz(movieTitle) {
   try {
     // Créer une complétion avec un message //gpt-4o-mini-2024-07-18
     const completion = await openai.chat.completions.create({
@@ -34,11 +34,11 @@ export async function generateQuiz() {
         {
           role: "system",
           content:
-            "You are a helpful assistant designed to output JSON. The JSON should include 'question' (a string), 'answers' (an array of strings), and 'correct_answer' (a string).",
+            "You are a helpful assistant designed to output JSON. The JSON should include 'question' (string), 'answers' (array of strings), and 'correct_answer' (string). Generate a 3-question quiz about the movie provided by the user.",
         },
         {
           role: "user",
-          content: "Je veux un Quiz avec 1 questions sur le film Alien",
+          content: `Generate quiz about the movie ${movieTitle}`,
         },
       ],
       store: true, // Si tu veux que le modèle garde une mémoire de la conversation
@@ -46,11 +46,12 @@ export async function generateQuiz() {
       // response_format: { type: "json_object" },
     });
 
+    console.log("reponse openai",completion)
     const event = completion.choices[0].message;
     const jsonObject = JSON.parse(event.content);
 
     // Afficher la réponse de l'API
-    // console.log(jsonObject);
+    console.log(jsonObject);
     return jsonObject;
   } catch (error) {
     console.error("Erreur lors de la génération de la complétion :", error);

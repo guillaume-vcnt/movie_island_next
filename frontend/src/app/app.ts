@@ -7,5 +7,6 @@ interface Movie {
     duration: number;
     audience: string;
     poster: string;
+    rating: number;
   }
   

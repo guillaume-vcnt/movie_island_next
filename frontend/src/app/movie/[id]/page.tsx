@@ -59,7 +59,10 @@ export default async function moviePage({
         ))}
       </ul>
       <br></br>
-      <Link className="text-red-500 hover:text-red-800" href="/quiz">
+      <Link
+        className="text-red-500 hover:text-red-800"
+        href={`/movie/${id}/quiz`}
+      >
         Start Quiz
       </Link>
       <br></br>

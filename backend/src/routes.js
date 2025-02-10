@@ -8,7 +8,7 @@ const sql = neon(process.env.DATABASE_URL);
 const router = express.Router();
 
 // req.params  ->  api/movie/:id  ->  api/movie/25
-// req.query  ->  api/movie?id=  ->  api/movie?id=25
+// req.query  ->  api/movie?genre=  ->  api/movie?genre=horror
 // req.body  ->  POSTMAN + JSON (Middleware : express.json() et express.urlencoded())
 
 // Route principale
@@ -38,10 +38,10 @@ router.get("/movie", async (req, res) => {
 });
 
 // Route pour filtrer les films par genre (req.query)
-router.get("/movie/genre/", async (req, res) => {
+router.get("/movie", async (req, res) => {
   try {
     console.log("Route films par genre");
-    const genre = req.query;
+    const genre = req.query.genre;
     const result = await sql`SELECT * FROM "Movies" WHERE "genre" = ${genre};`;
     const data = result;
     res.json({ message: "Methode GET : films par genre", data });
@@ -69,10 +69,14 @@ router.get("/movie/:id", async (req, res) => {
 router.get("/movie/:id/quiz", async (req, res) => {
   try {
     console.log("Route génération de quiz");
-    const result = await generateQuiz();
-    const data = result;
-    console.log("Quiz", data)
-    res.json({ message: "Methode GET : génération de quiz", data });
+    const id = req.params.id;
+    const movie = await sql`SELECT * FROM "Movies" WHERE "id" = ${id};`;
+    console.log("Movie", movie)
+    const movieTitle = movie[0].title
+    const quiz = await generateQuiz(movieTitle);
+    console.log("title", movieTitle)
+    console.log("Quiz", quiz)
+    res.json({ message: "Methode GET : génération de quiz", quiz});
   } catch (error) {
     console.error("OPENAI API Error:", error);
     res.status(500).send("Server Error");
