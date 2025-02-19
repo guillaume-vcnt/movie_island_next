@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-
 interface Movie {
   id: number;
   director: string;

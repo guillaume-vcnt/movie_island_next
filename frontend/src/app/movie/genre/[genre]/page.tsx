@@ -19,7 +19,7 @@ export default async function moviePage({
 }) {
   const { genre } = params;
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/movie?${genre}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/movie?genre=${genre}`,
     {
       method: "GET",
       headers: {
@@ -43,6 +43,10 @@ export default async function moviePage({
   return (
     <>
       <p>Page Genre</p>
+      <br></br>
+      <Link href="/">Return Home page</Link>
+      <br></br>
+      <br></br>
       <ul>
         {movieArray.map((movie) => (
           <li key={movie.id}>
@@ -64,9 +68,6 @@ export default async function moviePage({
           </li>
         ))}
       </ul>
-      <br></br>
-      <br></br>
-      <Link href="/">Return Home page</Link>
     </>
   );
 }

@@ -36,21 +36,13 @@ export default async function Home() {
     return (
       <>
         <ul>
-          <Link className="font-bold" href="/movie/">
+          <Link className="font-bold" href="/">
             Home Page
           </Link>
           <br></br>
           <br></br>
-          <Link className="font-bold text-red-500" href={`/genre`}>
-            Horreur
-          </Link>
-          <br></br>
-          <Link className="font-bold text-red-500" href="/movie/genre">
-            SCI-FI
-          </Link>
-          <br></br>
-          <Link className="font-bold text-red-500" href="/movie/genre">
-            Adventure
+          <Link className="font-bold text-red-500" href={"/movie/genre/Horror"}>
+            Horror
           </Link>
           <br></br>
           <br></br>
@@ -71,6 +63,9 @@ export default async function Home() {
             </li>
           ))}
         </ul>
+        <br></br>
+      <br></br>
+      <Link href="/">Return Home page</Link>
       </>
     );
   } catch (error) {

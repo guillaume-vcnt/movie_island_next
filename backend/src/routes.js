@@ -24,27 +24,26 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Route pour récupérer tous les films
-router.get("/movie", async (req, res) => {
-  try {
-    console.log("Route tous les films");
-    const result = await sql`SELECT * FROM "Movies"`;
-    const data = result;
-    res.json({ message: "Methode GET : tous les films", data });
-  } catch (error) {
-    console.error("Database Error:", error);
-    res.status(500).send("Server Error");
-  }
-});
+// Route pour récupérer tous les films 
+// Route pour récupérer les film par genre (req.query)
 
-// Route pour filtrer les films par genre (req.query)
+// PostgreSQL protège les requêtes préparées : En utilisant ${genre}, la valeur est envoyée séparément de la requête SQL, ce qui empêche une injection SQL. L'opérateur ANY() ne permet pas d'exécuter du code arbitraire : Contrairement à ILIKE ou LIKE où un % malicieux peut être injecté, ici la comparaison ANY(string_to_array(...)) ne laisse pas d'ouverture.
+
 router.get("/movie", async (req, res) => {
+  const { genre } = req.query;
+  console.log(genre);
   try {
-    console.log("Route films par genre");
-    const genre = req.query.genre;
-    const result = await sql`SELECT * FROM "Movies" WHERE "genre" = ${genre};`;
-    const data = result;
-    res.json({ message: "Methode GET : films par genre", data });
+    if (genre) {
+      console.log("Route genre");
+      const result = await sql`SELECT * FROM "Movies" WHERE ${genre} = ANY(string_to_array("genre", ','));`;
+      const data = result;
+      res.json({ message: "Methode GET : film par genre", data });
+    } else {
+      console.log("Route tous les films");
+      const result = await sql`SELECT * FROM "Movies"`;
+      const data = result;
+      res.json({ message: "Methode GET : tous les films", data });
+    }
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).send("Server Error");
@@ -71,12 +70,12 @@ router.get("/movie/:id/quiz", async (req, res) => {
     console.log("Route génération de quiz");
     const id = req.params.id;
     const movie = await sql`SELECT * FROM "Movies" WHERE "id" = ${id};`;
-    console.log("Movie", movie)
-    const movieTitle = movie[0].title
+    console.log("Movie", movie);
+    const movieTitle = movie[0].title;
     const quiz = await generateQuiz(movieTitle);
-    console.log("title", movieTitle)
-    console.log("Quiz", quiz)
-    res.json({ message: "Methode GET : génération de quiz", quiz});
+    console.log("title", movieTitle);
+    console.log("Quiz", quiz);
+    res.json({ message: "Methode GET : génération de quiz", quiz });
   } catch (error) {
     console.error("OPENAI API Error:", error);
     res.status(500).send("Server Error");
