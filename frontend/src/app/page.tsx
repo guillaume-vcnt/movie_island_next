@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import SearchBar from "../components/page";
 
 interface Movie {
   id: number;
@@ -39,10 +40,21 @@ export default async function Home() {
           <Link className="font-bold" href="/">
             Home Page
           </Link>
+
+          <SearchBar/>
+
           <br></br>
           <br></br>
           <Link className="font-bold text-red-500" href={"/movie/genre/Horror"}>
             Horror
+          </Link>
+          <br></br>
+          <Link className="font-bold text-red-500" href={"/movie/genre/Adventure"}>
+            Adventure
+          </Link>
+          <br></br>
+          <Link className="font-bold text-red-500" href={"/movie/genre/Science-fiction"}>
+          Science-fiction
           </Link>
           <br></br>
           <br></br>

@@ -42,7 +42,7 @@ export default async function moviePage({
 
   return (
     <>
-      <p>Page Genre</p>
+      <p>Page {genre}</p>
       <br></br>
       <Link href="/">Return Home page</Link>
       <br></br>
