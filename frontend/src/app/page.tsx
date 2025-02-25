@@ -38,12 +38,16 @@ export default async function Home() {
       <>
         <ul>
           <Link className="font-bold" href="/">
-            Home Page
+            HOME PAGE
           </Link>
-
-          <SearchBar/>
-
           <br></br>
+          <br></br>
+          <Link href="/login">
+            Return Login Page
+          </Link>
+          <br></br>
+          <br></br>
+          <SearchBar/>
           <br></br>
           <Link className="font-bold text-red-500" href={"/movie/genre/Horror"}>
             Horror
@@ -53,8 +57,8 @@ export default async function Home() {
             Adventure
           </Link>
           <br></br>
-          <Link className="font-bold text-red-500" href={"/movie/genre/Science-fiction"}>
-          Science-fiction
+          <Link className="font-bold text-red-500" href={"/movie/genre/Science-Fiction"}>
+          Science-Fiction
           </Link>
           <br></br>
           <br></br>

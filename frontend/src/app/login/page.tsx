@@ -5,11 +5,15 @@ import "./page.css";
 export default function login() {
   return (
     <>
-      <h1 className="font-bold">Page Login</h1>
-      return (
+      <h1 className="font-bold">LOGIN PAGE</h1>
+      <br></br>
+      <Link href="/">Return Home page</Link>
+      <br></br>
+      <br></br>
       <div className="login-form">
-        <form onSubmit={handleSubmit}>
-          <h1>BipBip.</h1>
+        {/* onSubmit={""} */}
+        <form>
+          <h1>Movie Island</h1>
 
           <div className="input-box">
             <input
@@ -17,17 +21,17 @@ export default function login() {
               id="email"
               placeholder="Email"
               autoComplete="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              className={errors?.email ? "input-error" : ""}
+              //onChange={(e) => setEmail(e.target.value)}
+              value={"test@gmail.com"}
+              //className={errors?.email ? "input-error" : ""}
               required
             />
 
             <FaUserAlt className="icon" />
 
-            {errors?.email && (
+            {/* {errors?.email && (
               <span className="error-message">{errors.email}</span>
-            )}
+            )} */}
           </div>
 
           <div className="input-box">
@@ -36,17 +40,17 @@ export default function login() {
               id="password"
               placeholder="Mot de passe"
               autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              className={errors?.password ? "input-error" : ""}
+              //onChange={(e) => setPassword(e.target.value)}
+              value={123}
+              //className={errors?.password ? "input-error" : ""}
               required
             />
 
             <FaLock className="icon" />
 
-            {errors?.password && (
+            {/* {errors?.password && (
               <span className="error-message">{errors.password}</span>
-            )}
+            )} */}
           </div>
 
           <button type="submit">Se connecter</button>
@@ -65,7 +69,7 @@ export default function login() {
           </div>
         </form>
       </div>
-      );
+      ;
     </>
   );
 }

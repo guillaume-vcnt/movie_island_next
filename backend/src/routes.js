@@ -35,7 +35,7 @@ router.get("/movie", async (req, res) => {
   try {
     if (genre) {
       console.log("Route genre");
-      const result = await sql`SELECT * FROM "Movies" WHERE ${genre} = ANY(string_to_array("genre", ','));`;
+      const result = await sql`SELECT * FROM "Movies" WHERE "genre" LIKE '%' || ${genre} || '%';`;
       const data = result;
       res.json({ message: "Methode GET : film par genre", data });
     } else {

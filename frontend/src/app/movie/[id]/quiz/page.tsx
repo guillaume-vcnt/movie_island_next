@@ -33,7 +33,7 @@ export default async function quizPage({
       {movieQuiz.quiz.correct_answer}
       <br></br>
       <br></br>
-      <Link href="/">Return Home page</Link>
+      <Link href={`/movie/${id}`}>Return Movie page</Link>
     </>
   );
 }
