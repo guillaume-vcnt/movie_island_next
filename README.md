@@ -8,7 +8,7 @@ Ce projet vise à développer un site web intégrant une base dedonnées, permet
 
 État du projet : En cours
 
-Technologies : Next.js, Tailwind CSS, Node.js, Express, PostgreSQL
+Technologies : Next.js, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL
 
 Services : Neon database, Vercel
 
