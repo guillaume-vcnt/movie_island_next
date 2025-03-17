@@ -1,35 +1,41 @@
-'use client'
-
-import { useState } from "react";
+"use client";
 import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 import "./page.css";
 
-const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+export default function SearchBar() {
+  const [search, setSearch] = useState("");
+  const [activeSearch, setActiveSearch] = useState("");
+  function handleSearch() {
+    setActiveSearch(search);
+  }
+  const movies = ["Alien", "Jaws", "Blade Runner"];
+  const filterMovie = movies.filter((movie) =>
+    movie.toLowerCase().includes(activeSearch.toLowerCase())
+  );
+  const resultFilter = filterMovie.map((movie) => <li key={movie}>{movie}</li>);
 
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearch = () => {
-    // Ajoutez ici la logique de recherche
-    console.log("Recherche pour :", searchTerm);
-  };
+  let resultSearch;
+  if (resultFilter.length === 0) {
+    resultSearch = <p>Aucun film trouvé</p>;
+  } else {
+    resultSearch = <ul>{resultFilter}</ul>; //une <ul> doit contenir des <li>
+  }
 
   return (
-    <div className="search-bar">
-      <input
-        type="text"
-        placeholder="Rechercher..."
-        value={searchTerm}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleSearch} className="search-button">
-        <FaSearch className="search-icon" />
-        <span className="sr-only">Recherche</span>
-      </button>
+    <div>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Recherche..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="search-button" onClick={handleSearch}>
+          <FaSearch className="search-icon" />
+        </button>
+      </div>
+      {resultSearch}
     </div>
   );
-};
-
-export default SearchBar;
+}
