@@ -1,5 +1,5 @@
 ![Project img](https://raw.githubusercontent.com/guillaume-vcnt/movie_island_next/refs/heads/main/Movie%20Island.jpg)
-alien
+
 ## Caractéristiques
 
 État du projet : En cours
