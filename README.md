@@ -1,8 +1,4 @@
-Movie Island
-
-## À propos
-
-Ce projet vise à développer un site web intégrant une base dedonnées, permettant aux utilisateurs de se connecter, de rechercher des films, de participer à des quiz générés par IA et d’ajouter des films à leur collection privée.
+![Project img](https://raw.githubusercontent.com/guillaume-vcnt/movie_island_next/refs/heads/main/Movie%20Island.jpg)
 
 ## Caractéristiques
 
@@ -10,7 +6,7 @@ Ce projet vise à développer un site web intégrant une base dedonnées, permet
 
 Technologies : Next.js, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL
 
-Services : Neon database, Vercel
+Services : Neon Postgres, Vercel
 
 Refactorisation : ---
 
