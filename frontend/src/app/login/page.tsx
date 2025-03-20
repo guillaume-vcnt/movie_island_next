@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import "./page.css";
 
-export default function login() {
+export default function loginPage() {
   return (
     <>
       <h1 className="font-bold">LOGIN PAGE</h1>

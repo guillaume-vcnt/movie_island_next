@@ -1,18 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Movie } from "@/types/globals"
 
-interface Movie {
-  id: number;
-  director: string;
-  title: string;
-  genre: string;
-  year: number;
-  duration: number;
-  audience: string;
-  poster: string;
-}
-
-export default async function moviePage({
+export default async function movieGenrePage({
   params,
 }: {
   readonly params: { genre: string };

@@ -24,18 +24,26 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Route pour récupérer tous les films 
+// Route pour récupérer tous les films
 // Route pour récupérer les film par genre (req.query)
 
 // PostgreSQL protège les requêtes préparées : En utilisant ${genre}, la valeur est envoyée séparément de la requête SQL, ce qui empêche une injection SQL. L'opérateur ANY() ne permet pas d'exécuter du code arbitraire : Contrairement à ILIKE ou LIKE où un % malicieux peut être injecté, ici la comparaison ANY(string_to_array(...)) ne laisse pas d'ouverture.
 
 router.get("/movie", async (req, res) => {
-  const { genre } = req.query;
+  console.log(req.query);
+  const { genre, searching } = req.query;
   console.log(genre);
   try {
-    if (genre) {
+    if (searching) {
+      console.log("Route search");
+      const result =
+        await sql`SELECT * FROM "Movies" WHERE "title" ILIKE '%' || ${searching} || '%' OR "director" ILIKE '%' || ${searching} || '%' OR "genre" ILIKE '%' || ${searching} || '%' OR "year"::text ILIKE '%' || ${searching} || '%'`;
+      const data = result;
+      res.json({ message: "Methode GET : film par recherche", data });
+    } else if (genre) {
       console.log("Route genre");
-      const result = await sql`SELECT * FROM "Movies" WHERE "genre" LIKE '%' || ${genre} || '%';`;
+      const result =
+        await sql`SELECT * FROM "Movies" WHERE "genre" LIKE '%' || ${genre} || '%';`;
       const data = result;
       res.json({ message: "Methode GET : film par genre", data });
     } else {

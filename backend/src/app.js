@@ -1,5 +1,5 @@
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
 import routes from "./routes.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -9,22 +9,15 @@ const port = process.env.PORT || 3001;
 const app = express();
 
 // Définir les options CORS
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     if (origin === "http://localhost:4001") {
-//       callback(null, true);  // Autorise uniquement http://localhost:4001
-//     } else {
-//       callback(new Error("CORS policy does not allow access from this origin"), false);  // Bloque toutes les autres origines
-//     }
-//   },
-//   methods: "GET", // Autorise uniquement certains types de requêtes
-//   allowedHeaders: ["Content-Type", "Authorization"], // Autorise ces headers
-// };
+const corsOptions = {
+  origin: "http://localhost:4000", // Autorise uniquement ce domaine
+  methods: ["GET"], // Autorise uniquement GET
+  allowedHeaders: ["Content-Type", "Authorization"], // Autorise ces headers
+};
 
-/// Middleware Cors
-//app.use(cors(corsOptions)); // Applique les options CORS
-//app.options("*", cors(corsOptions)); // Gérer les requêtes préflight (OPTIONS)
-// app.use(cors({ origin: "http://localhost:4001" }));
+// //Middleware Cors 
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Gérer les préflight requests (OPTIONS)
 
 // Middleware Express
 app.use(express.json()); // Pour analyser les données JSON
