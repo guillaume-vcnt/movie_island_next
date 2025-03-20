@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Movie } from "@/types/globals"
+import { Movie } from "@/types/globals";
 
 export default async function movieIdPage({
   params,
