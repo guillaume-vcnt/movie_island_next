@@ -24,16 +24,19 @@ export default async function quizPage({
   console.log(movieQuiz.quiz);
 
   return (
-    <>
-      <h1 className="font-bold">Page du Quiz</h1>
-      <br></br>
-      <p className="text-red-500">Question:</p> {movieQuiz.quiz.question}
-      <p className="text-red-500">Answers:</p> {movieQuiz.quiz.answers}
-      <p className="text-red-500">Correct answers:</p>{" "}
-      {movieQuiz.quiz.correct_answer}
-      <br></br>
-      <br></br>
-      <Link href={`/movie/${id}`}>Return Movie page</Link>
-    </>
+    <div className="flex justify-center">
+      <div id="quiz" className="flex flex-col">
+        <h1 className="font-bold self-center mt-[1rem] mb-[1rem]">Quiz page</h1>
+        <p className="font-bold text-red-500">Question:</p>{" "}
+        {movieQuiz.quiz.question}
+        <p className="font-bold text-red-500">Answers:</p>{" "}
+        {movieQuiz.quiz.answers}
+        <p className="font-bold text-red-500">Correct answers:</p>{" "}
+        {movieQuiz.quiz.correct_answer}
+        <Link className="mt-[1rem] self-center" href={`/movie/${id}`}>
+          Return to movie page
+        </Link>
+      </div>
+    </div>
   );
 }

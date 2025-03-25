@@ -31,35 +31,44 @@ export default async function SeachingPage({
     console.log("🎥", movieArray);
     if (movieArray.length === 0) {
       return (
-        <div>
-          <Link href="/">Return Home Page</Link>
-          <br></br>
-          <br></br>
-          <p>❌ Aucun films trouvés</p>
+        <div
+          id="searching-error"
+          className="flex justify-center mt-[1rem] mb-[1rem]"
+        >
+          <div className="flex flex-col">
+            <p className="font-bold text-red-500">❌ No movies found</p>
+            <br></br>
+            <Link className="flex self-center" href="/">
+              Return to home page
+            </Link>
+          </div>
         </div>
       );
     }
 
     return (
-      <div>
-        <Link href="/">Return Home Page</Link>
-        <br></br>
-        <br></br>
-        <ul>
-          {movieArray.map((movie) => (
-            <li key={movie.id}>
-              <Link href={`/movie/${movie.id}`}>
-                {movie.title}
-                <Image
-                  src={movie.poster}
-                  alt="Poster du film"
-                  width={100}
-                  height={60}
-                />
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div id="searching" className="flex justify-center mt-[1rem]">
+        <div className="flex flex-col">
+          <h1 className="self-center font-bold">Searching page</h1>
+          <div id="movies" className="flex mt-[1rem] mb-[1rem] gap-5">
+            {movieArray.map((movie) => (
+              <div key={movie.id}>
+                <Link href={`/movie/${movie.id}`}>
+                  {movie.title}
+                  <Image
+                    src={movie.poster}
+                    alt="Poster du film"
+                    width={100}
+                    height={60}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+          <Link className="self-center" href="/">
+            Return to home page
+          </Link>
+        </div>
       </div>
     );
   } catch (error) {
@@ -67,11 +76,16 @@ export default async function SeachingPage({
   }
 
   return (
-    <div>
-      <Link href="/">Return Home Page</Link>
-      <br></br>
-      <br></br>
-      <p>❌ Une erreur est survenue lors du chargement des films.</p>
+    <div id="loading-error" className="flex justify-center mt-[1rem] mb-[1rem]">
+      <div className="flex flex-col">
+        <p className=" font-bold text-red-500">
+          ❌ An error occurred while loading the movies
+        </p>
+        <br></br>
+        <Link className="flex self-center" href="/">
+          Return to home page
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,15 +1,10 @@
-import Link from "next/link";
+// import Link from "next/link";
 import { FaUserAlt, FaLock } from "react-icons/fa";
-import "./page.css";
+import "./login.css";
 
 export default function loginPage() {
   return (
-    <>
-      <h1 className="font-bold">LOGIN PAGE</h1>
-      <br></br>
-      <Link href="/">Return Home page</Link>
-      <br></br>
-      <br></br>
+    <div className="flex justify-center items-center w-full h-screen">
       <div className="login-form">
         {/* onSubmit={""} */}
         <form>
@@ -70,6 +65,6 @@ export default function loginPage() {
         </form>
       </div>
       ;
-    </>
+    </div>
   );
 }

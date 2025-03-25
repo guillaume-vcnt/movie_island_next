@@ -29,35 +29,36 @@ export default async function movieIdPage({
 
   return (
     <>
-      <ul>
+      <div id="movie" className="flex justify-center mt-[1rem] mb-[1rem]">
         {movieArray.map((movie) => (
-          <li key={movie.id}>
-            <h2 className="font-bold">{movie.title}</h2>
-            <p>Director: {movie.director}</p>
-            <p>Genre: {movie.genre}</p>
-            <p>Year: {movie.year}</p>
-            <p>Duration: {movie.duration} minutes</p>
-            <p>Audience: {movie.audience}</p>
-            <br></br>
+          <div className="flex flex-col" key={movie.id}>
+            <h2 className="self-center font-bold">{movie.title}</h2>
+            <div className="mt-[1rem] mb-[1rem]">
+              <p>Director: {movie.director}</p>
+              <p>Genre: {movie.genre}</p>
+              <p>Year: {movie.year}</p>
+              <p>Duration: {movie.duration} minutes</p>
+              <p>Audience: {movie.audience}</p>
+            </div>
             <Image
+              className="self-center"
               src={movie.poster}
               alt="Poster du film"
               width={100}
               height={60}
             />
-          </li>
+          </div>
         ))}
-      </ul>
-      <br></br>
+      </div>
       <Link
-        className="text-red-500 hover:text-red-800"
+        className="flex justify-center font-bold text-red-500 hover:text-red-800"
         href={`/movie/${id}/quiz`}
       >
         Start Quiz
       </Link>
-      <br></br>
-      <br></br>
-      <Link href="/">Return Home page</Link>
+      <Link className="flex justify-center" href="/">
+        Return to home page
+      </Link>
     </>
   );
 }

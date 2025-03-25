@@ -19,9 +19,8 @@ export default function HomePage() {
           headers: {
             "Content-Type": "application/json",
           },
-          //credentials: "same-origin", //Désactive le cache pour un rendu dynamique
-          //cache: "no-store", //
-          //  Désactive le cache pour un rendu dynamique
+          //credentials: "same-origin",
+          //cache: "no-store", // Désactive le cache pour un rendu dynamique
         });
 
         // Parse la réponse en JSON.
@@ -40,39 +39,29 @@ export default function HomePage() {
 
   return (
     <>
-      <ul>
+      <div id="title" className="flex justify-center mt-[1rem] mb-[1rem]">
         <Link className="font-bold" href="/">
           MOVIE ISLAND HOME PAGE
         </Link>
-        <br></br>
-        <br></br>
+      </div>
+      <div id="search-bar" className="flex justify-center mb-[1rem]">
         <SearchBar />
-        <br></br>
-        <Link className="font-bold text-red-500" href={"/movie/genre/Horror"}>
+      </div>
+      <div id="filter" className="flex justify-center gap-5 mb-[1.5rem]">
+        <Link className="font-bold" href={"/movie/genre/Horror"}>
           Horror
         </Link>
-        <br></br>
-        <Link
-          className="font-bold text-red-500"
-          href={"/movie/genre/Adventure"}
-        >
+        <Link className="font-bold" href={"/movie/genre/Adventure"}>
           Adventure
         </Link>
-        <br></br>
-        <Link
-          className="font-bold text-red-500"
-          href={"/movie/genre/Science-Fiction"}
-        >
+        <Link className="font-bold" href={"/movie/genre/Science-Fiction"}>
           Science-Fiction
         </Link>
-        <br></br>
-        <br></br>
-      </ul>
-      <ul>
+      </div>
+      <div id="movies" className="flex justify-center gap-5">
         {data.map((movie) => (
-          <li key={movie.id}>
+          <div key={movie.id}>
             <Link href={`/movie/${movie.id}`}>
-              {movie.title}
               <Image
                 src={movie.poster}
                 alt="Poster du film"
@@ -80,9 +69,9 @@ export default function HomePage() {
                 height={60}
               />
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
       ;
     </>
   );
