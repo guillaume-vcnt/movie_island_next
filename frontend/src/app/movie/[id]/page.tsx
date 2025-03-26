@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,8 +13,8 @@ export default function MoviePage({
   const [movieArray, setMovieArray] = useState<Movie[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // Utilisation de React.use() pour extraire les paramètres
-  const movieId = React.use(params).id;
+  // Utilisation des props directement, pas besoin de React.use()
+  const movieId = params.id;
 
   // Mettre l'ID dans l'état si ce n'est pas encore fait
   useEffect(() => {
@@ -104,7 +103,7 @@ export default function MoviePage({
               alt="Poster du film"
               width={100}
               height={150}
-              style={{ width: 'auto', height: 'auto' }}  // Garantir le respect du ratio avec CSS
+              style={{ width: "auto", height: "auto" }} // Garantir le respect du ratio avec CSS
               priority // Ajoute cette propriété pour que l'image soit chargée en priorité
             />
             <button

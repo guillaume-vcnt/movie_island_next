@@ -1,0 +1,8 @@
+{
+    "builds": [
+      {
+        "src": "frontend/package.json",  // Spécifie le dossier frontend
+        "use": "@vercel/next"            // Utilise le build de Next.js pour déployer le frontend
+      }
+    ]
+  }
