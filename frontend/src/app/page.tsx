@@ -6,11 +6,32 @@ import SearchBar from "../components/SearchBar";
 import { Movie } from "@/types/globals";
 
 export default function HomePage() {
-  const [data, setData] = useState<Movie[]>([]); // Typage avec Movie[]
+  const [data, setData] = useState<Movie[]>([]); // Liste des films + Typage avec Movie[]
+  const [favorites, setFavorites] = useState<number[]>([]); // Liste des favoris + Typage avec string[]
   console.log("Données reçues:", data); // Log des données pour vérifier
+  console.log("Favoris reçues:", favorites); // Log des données pour vérifier
 
   useEffect(() => {
-    // Exemple : un fetch pour récupérer des données
+    // Récupérer les favoris depuis localStorage
+    const storedFavorites = JSON.parse(
+      localStorage.getItem("favorites") ?? "[]"
+    );
+
+    // Log pour avant conversion
+    console.log("Favoris type avant conversion:", storedFavorites);
+
+    // Convertir chaque ID en nombre
+    const favoriteToNumbers = storedFavorites.map((id: string) =>
+      parseInt(id, 10)
+    );
+
+    // Log pour vérifier la conversion
+    console.log("Favoris convertis en nombres:", favoriteToNumbers);
+
+    // Mettre à jour l'état des favoris
+    setFavorites(favoriteToNumbers);
+
+    // Récupérer les films depuis l'API
     const fetchData = async () => {
       // Ce code s'exécute après le premier rendu du composant (équivalent à componentDidMount en class component)
       try {
@@ -37,6 +58,9 @@ export default function HomePage() {
     fetchData(); // Appel de la fonction async pour récupérer les données
   }, []);
 
+  // Filtrer les films favoris à partir de l'ID
+  const favoriteMovies = data.filter((movie) => favorites.includes(movie.id));
+
   return (
     <>
       <div id="title" className="flex justify-center mt-[1rem] mb-[1rem]">
@@ -44,7 +68,7 @@ export default function HomePage() {
           MOVIE ISLAND HOME PAGE
         </Link>
       </div>
-      <div id="search-bar" className="flex justify-center mb-[1rem]">
+      <div id="search-bar" className="flex justify-center mb-[1.5rem]">
         <SearchBar />
       </div>
       <div id="filter" className="flex justify-center gap-5 mb-[1.5rem]">
@@ -66,13 +90,40 @@ export default function HomePage() {
                 src={movie.poster}
                 alt="Poster du film"
                 width={100}
-                height={60}
+                height={150}
+                style={{ width: "auto", height: "auto" }} // Garantir le respect du ratio avec CSS
+                priority // Ajoute cette propriété pour que l'image soit chargée en priorité
               />
             </Link>
           </div>
         ))}
       </div>
-      ;
+      <h1
+        id="favorite-title"
+        className="flex justify-center font-bold mt-[2.5rem] mb-[1.5rem]"
+      >
+        ⭐ Favorites
+      </h1>
+      <div id="favorite-movies" className="flex justify-center gap-5">
+        {favoriteMovies.length > 0 ? (
+          favoriteMovies.map((movie) => (
+            <div key={movie.id}>
+              <Link href={`/movie/${movie.id}`}>
+                <Image
+                  src={movie.poster}
+                  alt="Poster du film"
+                  width={100}
+                  height={150}
+                  style={{ width: "auto", height: "auto" }} // Garantir le respect du ratio avec CSS
+                  priority // Ajoute cette propriété pour que l'image soit chargée en priorité
+                />
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p className="text-center">You have no movies in your favorites</p>
+        )}
+      </div>
     </>
   );
 }

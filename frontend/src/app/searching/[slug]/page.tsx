@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Movie } from "@/types/globals";
 
-export default async function SeachingPage({
+export default async function SearchingPage({
   params,
 }: {
   readonly params: Promise<{ slug: string }>;
@@ -59,7 +59,9 @@ export default async function SeachingPage({
                     src={movie.poster}
                     alt="Poster du film"
                     width={100}
-                    height={60}
+                    height={150}
+                    style={{ width: "auto", height: "auto" }} // Garantir le respect du ratio avec CSS
+                    priority // Ajoute cette propriété pour que l'image soit chargée en priorité
                   />
                 </Link>
               </div>

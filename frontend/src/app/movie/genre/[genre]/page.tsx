@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Movie } from "@/types/globals";
 
-export default async function movieGenrePage({
+export default async function MovieGenrePage({
   params,
 }: {
   readonly params: { genre: string };
@@ -40,16 +40,20 @@ export default async function movieGenrePage({
               <Link href={`/movie/${movie.id}`}>
                 {movie.title}
                 <Image
-                  src={movie.poster}
-                  alt="Poster du film"
-                  width={100}
-                  height={60}
+               src={movie.poster}
+               alt="Poster du film"
+               width={100}
+               height={150}
+               style={{ width: 'auto', height: 'auto' }}  // Garantir le respect du ratio avec CSS
+               priority // Ajoute cette propriété pour que l'image soit chargée en priorité
                 />
               </Link>
             </div>
           ))}
         </div>
-        <Link className="self-center" href="/">Return to home page</Link>
+        <Link className="self-center" href="/">
+          Return to home page
+        </Link>
       </div>
     </div>
   );

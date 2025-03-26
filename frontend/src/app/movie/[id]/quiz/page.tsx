@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default async function quizPage({
+export default async function QuizPage({
   params,
 }: {
   readonly params: { id: string };
