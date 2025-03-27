@@ -90,7 +90,7 @@ router.get("/movie/:id/quiz", async (req, res) => {
   }
 });
 
-// Route pour ajouter un film (req.body)
+// Route pour ajouter un film (req.body) avec Postman
 router.post("/movie", async (req, res) => {
   try {
     console.log("Route ajouter un film");
@@ -104,7 +104,7 @@ router.post("/movie", async (req, res) => {
   }
 });
 
-// Route pour mettre à jour un film (req.params / req.body) ?
+// Route pour mettre à jour un film (req.params / req.body) ? avec Postman
 router.put("/movie/:id", async (req, res) => {
   try {
     console.log("Route mettre à jour un film");
@@ -118,7 +118,7 @@ router.put("/movie/:id", async (req, res) => {
   }
 });
 
-// Route pour supprimer un film (req.params)
+// Route pour supprimer un film (req.params) avec Postman
 router.delete("/movie/:id", async (req, res) => {
   try {
     console.log("Route supprimer un film");

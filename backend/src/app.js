@@ -1,12 +1,13 @@
-import express from "express";
+import express from "express"; // Import d'Express pour créer le serveur
 import cors from "cors";
 import routes from "./routes.js";
+import auth from "./auth.js";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config(); // Charge les variables d'environnement (ex: clé secrète JWT)
 
 const port = process.env.PORT || 3001;
 // console.log("PORT", port)
-const app = express();
+const app = express(); // Création du serveur Express
 
 // Définir les options CORS
 const corsOptions = {
@@ -15,7 +16,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"], // Autorise ces headers
 };
 
-// //Middleware Cors 
+// //Middleware Cors
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions)); // Gérer les préflight requests (OPTIONS)
 
@@ -31,7 +32,8 @@ app.use((err, req, res, next) => {
 });
 
 // Préfixe de la route API
-app.use("/api", routes);
+app.use("/api", routes); // Utilise routes pour les routes générales sous /api
+app.use("/api/auth", auth); // Utilise auth pour les routes d'authentification sous /api/auth
 
 //Démarre un serveur web avec Express et écoute les requêtes HTTP sur un port spécifié.
 app.listen(port, () => {
