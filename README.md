@@ -8,12 +8,6 @@ Technologies : Next.js, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL
 
 Services : Neon Postgres, Vercel
 
-Refactorisation : ---
-
-Responsive : ---
-
-UX/UI : ---
-
 IDE : VSCode
 
 OS : Windows
