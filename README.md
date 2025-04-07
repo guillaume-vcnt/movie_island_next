@@ -6,7 +6,7 @@
 
 Technologies : Next.js, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL
 
-Services : Neon Postgres
+Services : Neon Postgres, Vercel
 
 IDE : VSCode
 
