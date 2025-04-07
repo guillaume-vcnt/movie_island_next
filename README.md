@@ -1,4 +1,4 @@
-![Project img](https://raw.githubusercontent.com/guillaume-vcnt/movie_island_next/refs/heads/main/Movie%20Island.jpg)
+![Project img](https://raw.githubusercontent.com/guillaume-vcnt/movie_island_next/refs/heads/main/MOVIE%20ISLAND.jpg)
 
 ## Caractéristiques
 
