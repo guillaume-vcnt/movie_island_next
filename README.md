@@ -6,15 +6,11 @@
 
 Technologies : Next.js, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL
 
-Services : Neon Postgres, Vercel
+Services : Neon Postgres
 
 IDE : VSCode
 
 OS : Windows
-
-## Utilisation
-
-S'exécute via : ---
 
 ## Sources
 
